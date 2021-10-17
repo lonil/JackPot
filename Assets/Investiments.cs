@@ -9,10 +9,19 @@ public class Investiments : MonoBehaviour
     public List<InvestmentCard> cards = new List<InvestmentCard>();
 
     [SerializeField] Transform cardsParent;
+    [SerializeField] Transform prefab;
 
     private void Awake()
     {
         instance = this;
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < 5; i++) 
+        {
+            Instantiate(prefab, cardsParent);
+        }
     }
 
     public float GetTotalValueInvested() 

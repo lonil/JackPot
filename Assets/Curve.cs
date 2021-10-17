@@ -10,10 +10,11 @@ public class Curve
     public AnimationCurve curve;
     public int duration;
     public float multiplier;
+    public float unit;
 
     [HideInInspector] public int hours;
 
-    public float _Value => (addictive ? 1 : 0) + curve.Evaluate(hours++ / duration) * multiplier;
+    public float _Value => (addictive ? 1 : 0) + hours++ * unit; //(addictive ? 1 : 0) + curve.Evaluate(hours++ / duration) * multiplier;
 }
 
 [System.Serializable]

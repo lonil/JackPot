@@ -19,6 +19,8 @@ public class InvestmentCard : MonoBehaviour
     [SerializeField] TMP_Text estimateValue;
     [SerializeField] TMP_Text max;
     [SerializeField] TMP_Text min;
+    [SerializeField] TMP_Text v;
+    [SerializeField] TMP_Text bou;
 
     public Investment_Obj inv;
 
@@ -29,8 +31,16 @@ public class InvestmentCard : MonoBehaviour
 
     Coroutine cor;
 
-    public int BoughtFromPlayer => boughtFromPlayer;
+    public int BoughtFromPlayer
+    {
+        get => boughtFromPlayer;
+        set 
+        {
+            boughtFromPlayer = value;
 
+            bou.text = boughtFromPlayer.ToString();
+        }
+    }
     public float _Value
     {
         get => value;
@@ -39,7 +49,13 @@ public class InvestmentCard : MonoBehaviour
             OnValueChanged?.Invoke(this.value, value);
 
             this.value = value;
+            v.text = this.value.ToString();
         }
+    }
+
+    private void Update()
+    {
+        _Value = value;
     }
 
     public Investment_Obj _Investment
@@ -49,9 +65,11 @@ public class InvestmentCard : MonoBehaviour
         {
             inv = value;
 
-            estimateValue.text = inv.estimateValue.ToString();
-            max.text = inv.max.ToString();
-            min.text = inv.min.ToString();
+            inv.estimateValue = (EventManager.instance.curves[inv.tag][0].multiplier);
+
+            estimateValue.text = "1 : " + (inv.estimateValue).ToString("0.00");
+            max.text = (inv.max = UnityEngine.Random.Range(2.3f, 8.2f)).ToString("0.00");
+            min.text = (inv.min = UnityEngine.Random.Range(-5.1f, -0.7f)).ToString("0.00");
         }
     }
 
@@ -68,6 +86,8 @@ public class InvestmentCard : MonoBehaviour
 
     private void Start()
     {
+        _Investment = _Investment;
+
         value = 1;
     }
 
@@ -77,7 +97,7 @@ public class InvestmentCard : MonoBehaviour
         {
             if (PlayerStatus.instance.TryTransiction(v))
             {
-                boughtFromPlayer++;
+                BoughtFromPlayer++;
 
                 return true;
             }
@@ -90,7 +110,7 @@ public class InvestmentCard : MonoBehaviour
             {
                 PlayerStatus.instance.Transiction(value);
 
-                boughtFromPlayer--;
+                BoughtFromPlayer--;
 
                 return true;
             }
