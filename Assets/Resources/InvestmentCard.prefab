@@ -94,6 +94,7 @@ MonoBehaviour:
   estimateValue: {fileID: 7810020671775364797}
   max: {fileID: 1050276875699603287}
   min: {fileID: 5204248215934163424}
+  inv: {fileID: 0}
 --- !u!1 &833046539435358619
 GameObject:
   m_ObjectHideFlags: 0
@@ -775,7 +776,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: df39a2714fb497b43b7c71d0ddad957f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
