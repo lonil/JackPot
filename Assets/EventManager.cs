@@ -8,7 +8,7 @@ public class EventManager : MonoBehaviour
 
     public Dictionary<Tag, List<Curve>> curves = new Dictionary<Tag, List<Curve>>();
 
-    List<Event> events = new List<Event>();
+    List<EventCard> events = new List<EventCard>();
 
     [SerializeField] EventCard cardPrefab;
     [SerializeField] Transform newCardRef;
@@ -27,22 +27,33 @@ public class EventManager : MonoBehaviour
 
         var eve = Resources.Load<Event>("");
 
+        var r = Random.Range(1.08f, 1.23f);
         curves.Add(Tag.Entertaiment, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+             duration = 100, multiplier = r, unit = r/100 } }));
 
+        r = Random.Range(1.08f, 1.23f);
         curves.Add(Tag.Sales, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+             duration = 100, multiplier = r , unit = r/100 } }));
 
+        r = Random.Range(1.08f, 1.23f);
         curves.Add(Tag.Tecnology, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+             duration = 100, multiplier = r , unit = r/100} }));
 
+        r = Random.Range(1.08f, 1.23f);
         curves.Add(Tag.Transport, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+             duration = 100, multiplier = r, unit = r/100 } }));
+
+        TimeController.instance.OnFinishDay += delegate ()
+        {
+            AddRandomEvent();
+        };
     }
 
     public void AddRandomEvent()
     {
-        Instantiate(cardPrefab, newCardRef.position, new Quaternion());
+        var r = Resources.Load<Event>(@"Assets/Resources/ScriptableObjects/Events");
+
+        events.Add(Instantiate(cardPrefab, newCardRef.position, new Quaternion()));
     }
 
     public void AddCurve(Tag tag, Curve curve)
@@ -70,14 +81,12 @@ public class EventManager : MonoBehaviour
             //        a += GetValueByCurves(curves[v.inv.subTags[i]]) * b;
             //}
 
-            v._Value = v._Value * a;// + Random.Range(-range, range);
+            v._Value = a;// + Random.Range(-range, range);
         }
     }
 
     float GetValueByCurves(List<Curve> c)
     {
-        Debug.Log(c[0].hours);
-
         return c[0]._Value;
     }
 }
