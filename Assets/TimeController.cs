@@ -10,6 +10,7 @@ public class TimeController : MonoBehaviour
     public static TimeController instance;
 
     public Action OnFinishDay;
+    public Action OnStartDay;
     public Action<int> OnReachAnHour;
 
     [Header("UI")]
@@ -55,6 +56,14 @@ public class TimeController : MonoBehaviour
         StartDay();
     }
 
+    void ResetHourMaskColor()
+    {
+        for (int i = 0; i < 24; i++)
+        {
+            hourMarks[i].color *= 0.5f;
+        }
+    }
+
     public void StartDay()
     {
         time = 0;
@@ -63,6 +72,8 @@ public class TimeController : MonoBehaviour
         couting = true;
 
         countingCoroutine = StartCoroutine(CountTime());
+
+        OnStartDay?.Invoke();
     }
 
     public void PauseTime(bool v)
@@ -105,6 +116,7 @@ public class TimeController : MonoBehaviour
             {
                 if (++currHour >= 24)
                 {
+                    ResetHourMaskColor();
                     OnFinishDay?.Invoke();
 
                     break;

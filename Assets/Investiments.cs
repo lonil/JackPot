@@ -19,9 +19,9 @@ public class Investiments : MonoBehaviour
     {
         float f = 0;
 
-        foreach (var inv in cards) 
+        foreach (var inv in cards)   
         {
-            f += inv.BoughtFromPlayer * inv._Value;
+            f += inv._Value;
         }
 
         return f;
@@ -33,7 +33,7 @@ public class Investiments : MonoBehaviour
 
         foreach (var inv in cards)
         {
-            f += inv.BoughtFromPlayer;
+            f += inv.invAmount;
         }
 
         return f;

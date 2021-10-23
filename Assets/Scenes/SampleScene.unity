@@ -350,8 +350,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ab1aa94d01b06499bb69a5dd61d0d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardPrefab: {fileID: 0}
-  newCardRef: {fileID: 0}
+  cardPrefab: {fileID: 8843067765531547455, guid: 008b7f14c45e5d7429613046564fb711, type: 3}
+  newCardRef: {fileID: 901142240}
   defaultCurve:
     serializedVersion: 2
     m_Curve:
@@ -376,7 +376,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  range: 0.12
+  range: 0.012
 --- !u!1 &193733984
 GameObject:
   m_ObjectHideFlags: 0
@@ -1223,6 +1223,7 @@ Transform:
   m_Children:
   - {fileID: 105665604}
   - {fileID: 1972315892}
+  - {fileID: 901142240}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2088,6 +2089,36 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 882422071}
   m_CullTransparentMesh: 1
+--- !u!1 &901142239
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 901142240}
+  m_Layer: 0
+  m_Name: ref
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &901142240
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 901142239}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -956.96, y: -539.9, z: 0.87}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 538850465}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1058129897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2557,7 @@ MonoBehaviour:
   timeBar: {fileID: 620007713}
   hourIconParent: {fileID: 1653340548}
   hourMarkPrefab: {fileID: 6502183888957300016, guid: 39cc1722e75f0e548af446a75a8b81de, type: 3}
-  realTimeForGameDay: 40
+  realTimeForGameDay: 12
 --- !u!4 &1502139387
 Transform:
   m_ObjectHideFlags: 0

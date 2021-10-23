@@ -38,11 +38,21 @@ public class EventManager : MonoBehaviour
 
         curves.Add(Tag.Transport, new List<Curve>(new Curve[] { new Curve() { constant = 1, curve = defaultCurve,
              duration = 100, multiplier = Random.Range(0.01f, 0.12f) } }));
+
+        TimeController.instance.OnFinishDay += delegate ()
+        {
+            for (int i = 0; i < PlayerStatus.instance.Day_Gain + 1; i++)
+            {
+                AddRandomEvent();
+            }
+        };
     }
 
     public void AddRandomEvent()
     {
-        Instantiate(cardPrefab, newCardRef.position, new Quaternion());
+        var p = Instantiate(cardPrefab, newCardRef.position, new Quaternion());
+
+        p._Event = Resources.Load<Event>(@"ScriptableObjects/Event/" + "0");
     }
 
     public void AddCurve(Tag tag, Curve curve)
@@ -70,12 +80,28 @@ public class EventManager : MonoBehaviour
             //        a += GetValueByCurves(curves[v.inv.subTags[i]]) * b;
             //}
 
-            v._Value = v._Value * a;// + Random.Range(-range, range);
+            v._Value *= a + Random.Range(-range, range);
         }
     }
 
     float GetValueByCurves(List<Curve> c)
     {
-        return c[0].GetValue();
+        float a, aa = 1;
+
+        int i = 0;
+        while (i < c.Count)
+        {
+            a = c[i].GetValue();
+
+            if (a == -1)
+                c.RemoveAt(i);
+            else
+            {
+                aa *= a;
+                i++;
+            }
+        }
+
+        return aa;
     }
 }

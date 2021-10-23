@@ -20,7 +20,10 @@ public class Curve
 
     public float GetValue() 
     {
-        return constant + curve.Evaluate((float)hours++ / duration) * multiplier;
+        if (hours >= duration)
+            return -1;
+        else
+            return constant + curve.Evaluate((float)hours++ / duration) * multiplier;
     }
 
     public float GetValue(int hour)

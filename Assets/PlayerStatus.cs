@@ -17,6 +17,9 @@ public class PlayerStatus : MonoBehaviour
     int loss;
     int gain;
 
+    int day_Loss;
+    int day_Gain;
+
     [SerializeField] TMP_Text capital_Label;
     [SerializeField] TMP_Text loss_Label;
     [SerializeField] TMP_Text gain_Label; 
@@ -27,7 +30,7 @@ public class PlayerStatus : MonoBehaviour
         set
         {
             capital = value;
-            capital_Label.text = DefaultCapitalText + capital.ToString();
+            capital_Label.text = DefaultCapitalText + capital.ToString("0.00");
         }
     }
 
@@ -51,6 +54,10 @@ public class PlayerStatus : MonoBehaviour
         }
     }
 
+    public int Day_Loss => day_Loss;
+
+    public int Day_Gain => day_Gain;
+
     private void Awake()
     {
         instance = this;
@@ -61,6 +68,12 @@ public class PlayerStatus : MonoBehaviour
         Loss = 0;
         Gain = 0;
         Capital = GameManager.instance.salary;
+
+        TimeController.instance.OnStartDay += delegate ()
+        {
+            day_Gain = 0;
+            day_Loss = 0;
+        };
     }
 
     public bool TryTransiction(float v)

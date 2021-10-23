@@ -33,8 +33,8 @@ public class EndOfTheDay_PopUp : MonoBehaviour
         float totalValue = Investiments.instance.GetTotalValueInvested();
         float total = Investiments.instance.GetTotalInvested();
 
-        inv.text = DefaultInvestment + totalValue.ToString();
-        profit.text = DefaultProfit + (totalValue - total).ToString();
+        inv.text = DefaultInvestment + totalValue.ToString("0.00");
+        profit.text = DefaultProfit + (totalValue - total).ToString("0.00");
 
         if (totalValue != 0)
             profitCent.text = DefaultProfitPerCent + Mathf.FloorToInt((totalValue - total) / totalValue * 100).ToString();

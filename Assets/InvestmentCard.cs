@@ -21,7 +21,8 @@ public class InvestmentCard : MonoBehaviour
 
     public Investment_Obj inv;
 
-    float mont = 0;
+    float mont;
+    [HideInInspector] public int invAmount;
 
     Coroutine cor;
 
@@ -45,7 +46,7 @@ public class InvestmentCard : MonoBehaviour
         {
             mont = value;
 
-            investment_Label.text = mont.ToString();
+            investment_Label.text = mont.ToString("0.00");
         }
     }
 
@@ -62,9 +63,9 @@ public class InvestmentCard : MonoBehaviour
 
     void UpdateLabels()
     {
-        estimateValue.text = inv.estimateValue.ToString();
-        max.text = inv.max.ToString();
-        min.text = inv.min.ToString();
+        estimateValue.text = inv.estimateValue.ToString("0.00");
+        max.text = inv.max.ToString("0.00");
+        min.text = inv.min.ToString("0.00");
     }
 
     public void OnClickButtonDown(int i)
@@ -85,6 +86,8 @@ public class InvestmentCard : MonoBehaviour
             if (PlayerStatus.instance.TryTransiction(v))
             {
                 BoughtFromPlayer++;
+                
+                invAmount++;
 
                 return true;
             }
@@ -98,6 +101,9 @@ public class InvestmentCard : MonoBehaviour
                 PlayerStatus.instance.Transiction(1);
 
                 BoughtFromPlayer--;
+                
+                if (invAmount > 0)
+                    invAmount--;
 
                 return true;
             }

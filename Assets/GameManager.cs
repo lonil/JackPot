@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
         TimeController.instance.OnFinishDay += CountDays;
     }
 
-    void CountDays() 
+    void CountDays()
     {
         if (++daysCounter >= 5) 
         {

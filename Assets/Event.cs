@@ -23,8 +23,6 @@ public class Requirement
 {
     public RequirementType requirementType;
 
-    public int timeDelay;
-
     public TagRequirement_Params[] tagRequirement_Params;
 }
 
