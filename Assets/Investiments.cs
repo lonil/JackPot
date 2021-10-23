@@ -27,9 +27,9 @@ public class Investiments : MonoBehaviour
         return f;
     }
 
-    public int GetTotalInvested()
+    public float GetTotalInvested()
     {
-        int f = 0;
+        float f = 0;
 
         foreach (var inv in cards)
         {

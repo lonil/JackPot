@@ -1,9 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
 using System;
+using System.Collections;
 using TMPro;
+using UnityEngine;
 
 public class InvestmentCard : MonoBehaviour
 {
@@ -19,26 +17,35 @@ public class InvestmentCard : MonoBehaviour
     [SerializeField] TMP_Text estimateValue;
     [SerializeField] TMP_Text max;
     [SerializeField] TMP_Text min;
+    [SerializeField] TMP_Text investment_Label;
 
     public Investment_Obj inv;
 
-    float value = 1;
-    float boughtFromPlayer_Value;
-
-    int boughtFromPlayer;
+    float mont = 0;
 
     Coroutine cor;
 
-    public int BoughtFromPlayer => boughtFromPlayer;
-
     public float _Value
     {
-        get => value;
+        get => mont;
         set
         {
-            OnValueChanged?.Invoke(this.value, value);
+            OnValueChanged?.Invoke(this.mont, value);
 
-            this.value = value;
+            this.mont = value;
+
+            investment_Label.text = mont.ToString("0.00");
+        }
+    }
+
+    public float BoughtFromPlayer
+    {
+        get => mont;
+        set
+        {
+            mont = value;
+
+            investment_Label.text = mont.ToString();
         }
     }
 
@@ -49,10 +56,15 @@ public class InvestmentCard : MonoBehaviour
         {
             inv = value;
 
-            estimateValue.text = inv.estimateValue.ToString();
-            max.text = inv.max.ToString();
-            min.text = inv.min.ToString();
+            UpdateLabels();
         }
+    }
+
+    void UpdateLabels()
+    {
+        estimateValue.text = inv.estimateValue.ToString();
+        max.text = inv.max.ToString();
+        min.text = inv.min.ToString();
     }
 
     public void OnClickButtonDown(int i)
@@ -66,18 +78,13 @@ public class InvestmentCard : MonoBehaviour
             StopCoroutine(cor);
     }
 
-    private void Start()
-    {
-        value = 1;
-    }
-
     bool Transiction(bool isGreen, int v)
     {
         if (isGreen)
         {
             if (PlayerStatus.instance.TryTransiction(v))
             {
-                boughtFromPlayer++;
+                BoughtFromPlayer++;
 
                 return true;
             }
@@ -86,11 +93,11 @@ public class InvestmentCard : MonoBehaviour
         }
         else
         {
-            if (boughtFromPlayer + v >= 0)
+            if (mont + v >= 0)
             {
-                PlayerStatus.instance.Transiction(value);
+                PlayerStatus.instance.Transiction(1);
 
-                boughtFromPlayer--;
+                BoughtFromPlayer--;
 
                 return true;
             }

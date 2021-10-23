@@ -31,7 +31,7 @@ public class EndOfTheDay_PopUp : MonoBehaviour
         panel.DOScale(Vector3.one, 0.618f);
 
         float totalValue = Investiments.instance.GetTotalValueInvested();
-        int total = Investiments.instance.GetTotalInvested();
+        float total = Investiments.instance.GetTotalInvested();
 
         inv.text = DefaultInvestment + totalValue.ToString();
         profit.text = DefaultProfit + (totalValue - total).ToString();

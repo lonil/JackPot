@@ -27,17 +27,17 @@ public class EventManager : MonoBehaviour
 
         var eve = Resources.Load<Event>("");
 
-        curves.Add(Tag.Entertaiment, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+        curves.Add(Tag.Entertaiment, new List<Curve>(new Curve[] { new Curve() { constant = 1, curve = defaultCurve,
+             duration = 100, multiplier = Random.Range(0.01f, 0.12f) } }));
 
-        curves.Add(Tag.Sales, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+        curves.Add(Tag.Sales, new List<Curve>(new Curve[] { new Curve() { constant = 1, curve = defaultCurve,
+             duration = 100, multiplier = Random.Range(0.01f, 0.12f) } }));
 
-        curves.Add(Tag.Tecnology, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+        curves.Add(Tag.Tecnology, new List<Curve>(new Curve[] { new Curve() { constant = 1, curve = defaultCurve,
+             duration = 100, multiplier = Random.Range(0.01f, 0.12f) } }));
 
-        curves.Add(Tag.Transport, new List<Curve>(new Curve[] { new Curve() { addictive = true, curve = defaultCurve,
-             duration = 100, multiplier = Random.Range(1.38f, 2.3f) } }));
+        curves.Add(Tag.Transport, new List<Curve>(new Curve[] { new Curve() { constant = 1, curve = defaultCurve,
+             duration = 100, multiplier = Random.Range(0.01f, 0.12f) } }));
     }
 
     public void AddRandomEvent()
@@ -76,8 +76,6 @@ public class EventManager : MonoBehaviour
 
     float GetValueByCurves(List<Curve> c)
     {
-        Debug.Log(c[0].hours);
-
-        return c[0]._Value;
+        return c[0].GetValue();
     }
 }
